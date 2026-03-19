@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Face Dodge Game</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+</head>
+
+<body>
+  <div class="game-container">
+    <h2>😃 Esquiva los enemigos con tu cara</h2>
+
+    <canvas id="game"></canvas>
+
+    <!-- START MODAL -->
+    <div id="startModal" class="modal">
+      <div class="modalContent">
+        <h2>Face Dodge</h2>
+        <button id="startBtn">Start Game</button>
+      </div>
+    </div>
+
+    <!-- GAME OVER MODAL -->
+    <div id="gameOverModal" class="modal" style="display: none">
+      <div class="modalContent">
+        <h2>Game Over</h2>
+        <p id="finalScore"></p>
+        <button id="restartBtn">Play Again</button>
+      </div>
+    </div>
+
+
+    <video id="video" autoplay playsinline></video>
+
+
+
+  </div>
+
+  <script src="game.js"></script>
+</body>
+
+</html>
