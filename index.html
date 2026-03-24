@@ -1,47 +1,66 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-  <title>Face Dodge Game</title>
 
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Face Dodge Vertical</title>
+
+  <link rel="stylesheet" href="style.css">
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
 </head>
 
 <body>
+
   <div class="game-container">
-    <h2>😃 Esquiva los enemigos con tu cara</h2>
+
+    <div class="hud">
+
+      <div class="hud-left">
+        <span id="timer">30</span>
+      </div>
+
+      <div class="hud-center">
+        <img src="./assets/logo.png" class="hud-img">
+      </div>
+
+      <div class="hud-right">
+        <span id="score">0</span>
+      </div>
+
+    </div>
+
+    <img src="./assets/background-game.png" class="bg">
+
+    
+    <video id="video" autoplay playsinline></video>
 
     <canvas id="game"></canvas>
 
-    <!-- START MODAL -->
-    <div id="startModal" class="modal">
-      <div class="modalContent">
-        <h2>Face Dodge</h2>
-        <button id="startBtn">Start Game</button>
-      </div>
+  </div>
+
+  <!-- START -->
+  <div id="startModal" class="modal" style="display:flex;">
+    <div class="modalContent">
+      <h2>Face Dodge</h2>
+      <button id="startBtn">Start</button>
     </div>
+  </div>
 
-    <!-- GAME OVER MODAL -->
-    <div id="gameOverModal" class="modal" style="display: none">
-      <div class="modalContent">
-        <h2>Game Over</h2>
-        <p id="finalScore"></p>
-        <button id="restartBtn">Play Again</button>
-      </div>
+  <!-- GAME OVER -->
+  <div id="gameOverModal" class="modal">
+    <div class="modalContent">
+      <h2>Game Over</h2>
+      <p id="finalScore"></p>
+      <button id="restartBtn">Play Again</button>
     </div>
-
-
-    <video id="video" autoplay playsinline></video>
-
-
-
   </div>
 
   <script src="game.js"></script>
+
 </body>
 
 </html>

@@ -1,42 +1,118 @@
 body{
-  background: url("background.gif") no-repeat center center fixed;
-  background-size: cover;
+  margin:0;
+  background:#000;
   color:white;
   text-align:center;
   font-family:Arial;
 }
 
-canvas {
-    border: 3px solid white;
-    margin-top: 20px;
+/* CONTENEDOR VERTICAL */
+
+.game-container{
+  position:relative;
+  width:100%;
+  max-width:400px;
+  height:90vh;
+  margin:auto;
+  overflow:hidden;
+  border-radius:12px;
 }
 
-
-/* modal base */
-
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.85);
+/* Header */
+.hud{
+  position:absolute;
+  top:10px;
+  left:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:5;
+  pointer-events:none;
 }
 
-.modalContent {
-    background: #222;
-    padding: 40px;
-    border-radius: 10px;
-    text-align: center;
+/* columnas */
+
+.hud-left{
+  width:33%;
+  text-align:left;
 }
 
-button {
-    padding: 12px 25px;
-    font-size: 18px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
+.hud-center{
+  width:33%;
+  text-align:center;
+}
+
+.hud-right{
+  width:33%;
+  text-align:right;
+}
+
+/* estilos */
+
+#timer, #score{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.hud-img{
+  width: 5rem;
+  height: 5rem
+}
+
+/* BACKGROUND */
+
+.bg{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+  left: 0;
+}
+
+/* CÁMARA */
+
+video{
+  display: none;
+}
+
+/* JUEGO */
+
+canvas{
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:2;
+}
+
+/* MODALES */
+
+.modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,0.85);
+  z-index:10;
+}
+
+.modalContent{
+  background:#222;
+  padding:40px;
+  border-radius:12px;
+}
+
+button{
+  padding:12px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  background:#00c3ff;
+  color:white;
 }

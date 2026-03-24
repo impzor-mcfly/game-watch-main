@@ -8,19 +8,32 @@ const startBtn = document.getElementById("startBtn");
 const restartBtn = document.getElementById("restartBtn");
 const finalScore = document.getElementById("finalScore");
 
-canvas.width = 600;
-canvas.height = 400;
+canvas.width = 400;
+canvas.height = 700;
+let timeLeft = 30;
 
+const scoreEl = document.getElementById("score");
+const timerEl = document.getElementById("timer");
+timerEl.innerText = 'TIME: ' + timeLeft;
+
+// IMAGENES
 const playerImg = new Image();
-playerImg.src = "player.png";
+playerImg.src = "./assets/player.png";
 
-const enemyImg = new Image();
-enemyImg.src = "enemy.png";
+const enemySources = ["./assets/item1.png", "./assets/item2.png", "./assets/item3.png", "./assets/item4.png", "./assets/item5.png"];
+const enemyImages = [];
 
+enemySources.forEach(src => {
+  const img = new Image();
+  img.src = src;
+  enemyImages.push(img);
+});
+
+// PLAYER
 let player = {
   x: 300,
-  y: 320,
-  width: 70,
+  y: 600,
+  width: 75,
   height: 70,
 };
 
@@ -33,16 +46,35 @@ let gameRunning = false;
 function spawnObject() {
   if (!gameRunning) return;
 
+   const img = enemyImages[Math.floor(Math.random()*enemyImages.length)];
+
   objects.push({
     x: Math.random() * (canvas.width - 40),
     y: -40,
     size: 40,
     speed: 3 + Math.random() * 2,
+    img:img
   });
 }
 
 setInterval(spawnObject, 1000);
 
+// ============= TIMER ==============
+setInterval(() => {
+
+  if (!gameRunning) return;
+
+  timeLeft--;
+
+  timerEl.innerText = 'TIME: ' + timeLeft
+
+  if (timeLeft <= 0) {
+    gameOver();
+  }
+
+}, 1000);
+
+// ================= COLLISION =================
 function collision(a, b) {
   const padding = 20; //ajusta el hitbox
 
@@ -54,6 +86,7 @@ function collision(a, b) {
   );
 }
 
+// ================= GAME OVER =================
 function gameOver() {
   gameRunning = false;
 
@@ -62,24 +95,31 @@ function gameOver() {
   gameOverModal.style.display = "flex";
 }
 
+// ================= LOOP =================
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   if (gameRunning) {
+
+    // movimiento suave
     player.x += (targetX - player.x) * 0.25;
 
+    // límite pantalla
     player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
   }
 
+  // jugador
   if (playerImg.complete) {
     ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
   }
 
+  // enemigos
   objects.forEach((o, index) => {
+
     if (gameRunning) o.y += o.speed;
 
-    if (enemyImg.complete) {
-      ctx.drawImage(enemyImg, o.x, o.y, o.size, o.size);
+    if (o.img.complete) {
+      ctx.drawImage(o.img, o.x, o.y, o.size, o.size);
     }
 
     if (gameRunning && collision(player, o)) {
@@ -90,11 +130,10 @@ function update() {
       objects.splice(index, 1);
       score++;
     }
+
   });
 
-  ctx.fillStyle = "white";
-  ctx.font = "20px Arial";
-  ctx.fillText("Score: " + score, 10, 30);
+  scoreEl.innerText = "Flavor: " +  score;
 
   requestAnimationFrame(update);
 }
