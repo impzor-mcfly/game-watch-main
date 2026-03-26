@@ -35,14 +35,14 @@
 
     <img src="./assets/background-game.png" class="bg">
 
-    
+
     <video id="video" autoplay playsinline></video>
 
     <canvas id="game"></canvas>
 
   </div>
 
-  <!-- START -->
+  <!---------- START ---------->
   <div id="startModal" class="modal" style="display:flex;">
     <div class="modalContent">
       <h2>Face Dodge</h2>
@@ -50,13 +50,38 @@
     </div>
   </div>
 
-  <!-- GAME OVER -->
+  <!--------- GAME OVER ---------->
   <div id="gameOverModal" class="modal">
-    <div class="modalContent">
-      <h2>Game Over</h2>
-      <p id="finalScore"></p>
-      <button id="restartBtn">Play Again</button>
+
+    <div class="gameover-container">
+
+      <!-- LOGO -->
+      <img src="./assets/logo.png" class="logo">
+
+      <!-- CARD -->
+      <div class="card">
+
+        <h2 class="score-text"><span id="finalScore">0</span>!</h2>
+
+        <!-- ESTRELLAS -->
+        <div class="stars">
+          <img src="./assets/star.png">
+          <img src="./assets/star.png">
+          <img src="./assets/star.png">
+        </div>
+
+        <h1 class="winner">WINNER!</h1>
+
+        <!-- BOTELLAS -->
+        <img class="bottles" src="./assets/botellas.png">
+
+
+        <button id="restartBtn">Play Again</button>
+
+      </div>
+
     </div>
+
   </div>
 
   <script src="game.js"></script>

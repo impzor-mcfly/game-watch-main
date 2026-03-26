@@ -1,15 +1,15 @@
 const video = document.getElementById("video");
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
+const gameContainer = document.querySelector(".game-container");
 
 const startModal = document.getElementById("startModal");
 const gameOverModal = document.getElementById("gameOverModal");
 const startBtn = document.getElementById("startBtn");
 const restartBtn = document.getElementById("restartBtn");
 const finalScore = document.getElementById("finalScore");
+const winnerText = document.querySelector(".winner");
 
-canvas.width = 400;
-canvas.height = 700;
 let timeLeft = 30;
 
 const scoreEl = document.getElementById("score");
@@ -31,10 +31,10 @@ enemySources.forEach(src => {
 
 // PLAYER
 let player = {
-  x: 300,
-  y: 600,
-  width: 75,
-  height: 70,
+  x: 0,
+  y: 0,
+  width: 0,
+  height: 0,
 };
 
 let targetX = player.x;
@@ -43,17 +43,38 @@ let score = 0;
 
 let gameRunning = false;
 
+function resizeGame() {
+  canvas.width = gameContainer.clientWidth;
+  canvas.height = gameContainer.clientHeight;
+
+  player.width = canvas.width * 0.09;
+  player.height = player.width * 0.93;
+  player.y = canvas.height - player.height - canvas.height * 0.08;
+
+  if (!gameRunning) {
+    player.x = (canvas.width - player.width) / 2;
+    targetX = player.x;
+  } else {
+    player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
+    targetX = Math.max(0, Math.min(canvas.width - player.width, targetX));
+  }
+}
+
+resizeGame();
+window.addEventListener("resize", resizeGame);
+
 function spawnObject() {
   if (!gameRunning) return;
 
-   const img = enemyImages[Math.floor(Math.random()*enemyImages.length)];
+  const img = enemyImages[Math.floor(Math.random() * enemyImages.length)];
+  const size = canvas.width * 0.05;
 
   objects.push({
-    x: Math.random() * (canvas.width - 40),
-    y: -40,
-    size: 40,
-    speed: 3 + Math.random() * 2,
-    img:img
+    x: Math.random() * (canvas.width - size),
+    y: -size,
+    size,
+    speed: canvas.height * (0.004 + Math.random() * 0.0025),
+    img
   });
 }
 
@@ -90,7 +111,8 @@ function collision(a, b) {
 function gameOver() {
   gameRunning = false;
 
-  finalScore.innerText = "Score: " + score;
+  finalScore.innerText = "FLAVOR: " + score;
+  winnerText.innerText = score > 15 ? "WINNER!" : "TRY AGAIN";
 
   gameOverModal.style.display = "flex";
 }
