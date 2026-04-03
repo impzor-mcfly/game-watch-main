@@ -25,7 +25,6 @@ body{
 /* Header */
 .hud{
   position:absolute;
-  top:10px;
   left:0;
   width:100%;
   display:flex;
@@ -40,6 +39,7 @@ body{
 .hud-left{
   width:33%;
   text-align:left;
+  margin-left: 2rem;
 }
 
 .hud-center{
@@ -50,6 +50,7 @@ body{
 .hud-right{
   width:33%;
   text-align:right;
+  margin-right: 2rem;
 }
 
 /* estilos */
@@ -64,8 +65,9 @@ body{
 }
 
 .hud-img{
-  width: 5rem;
-  height: 5rem
+  margin-top: 1rem;
+  width: 12rem;
+  height: 12rem
 }
 
 /* BACKGROUND */

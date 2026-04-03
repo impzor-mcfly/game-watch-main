@@ -49,7 +49,7 @@ function resizeGame() {
 
   player.width = canvas.width * 0.09;
   player.height = player.width * 0.93;
-  player.y = canvas.height - player.height - canvas.height * 0.08;
+  player.y = canvas.height - player.height - canvas.height * 0.02;
 
   if (!gameRunning) {
     player.x = (canvas.width - player.width) / 2;
@@ -145,12 +145,13 @@ function update() {
     }
 
     if (gameRunning && collision(player, o)) {
-      gameOver();
+      objects.splice(index, 1);
+      score++;
+      return;
     }
 
     if (o.y > canvas.height) {
       objects.splice(index, 1);
-      score++;
     }
 
   });
